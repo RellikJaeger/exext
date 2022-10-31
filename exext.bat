@@ -5,9 +5,9 @@ setlocal enabledelayedexpansion
 for %%i in (*.%1) do (
 	set test=%%i
 	echo.
-	echo ffmpeg -i "!test!" "!test:~0,-4!.%2"
+	echo ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "!test!" "!test:~0,-4!.%2"
 	echo.
-	ffmpeg -i "!test!" "!test:~0,-4!.%2"
+	ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "!test!" "!test:~0,-4!.%2"
 )
 endlocal
 goto :eof
