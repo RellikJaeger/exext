@@ -1,9 +1,9 @@
-# `exext.bat` for Windows cmd
-### `exext.bat` is a script to batch transcode multimedia files in the same folder using `FFmpeg` without entering the file names.
+# `exext` for Linux
+### `exext` is a script to batch transcode multimedia files in the same folder using `FFmpeg` without entering the file names.
   
 ### Before using this script, you must install `FFmpeg` and should be accessible from cmd.
 ---
-#### Put this `exext.bat` file into `%SystemRoot%` ("C:\Windows\") folder.
+#### Put this `exext` file into `$HOME/.local/bin` folder and export to PATH or put into `/usr/bin` with root access.
 #### Go to a folder with jpg image files, open cmd there and type the following command:
 ```cmd
 exext jpg png
