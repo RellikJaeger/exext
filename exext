@@ -1,0 +1,4 @@
+#!/bin/bash
+for name in *.$1; do
+  ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "$name" "${name%.*}.$2"
+done
