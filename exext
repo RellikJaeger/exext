@@ -1,4 +1,35 @@
 #!/bin/bash
-for name in *.$1; do
-  ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "$name" "${name%.*}.$2"
+
+if [ -z "$1" ]; then
+  echo "1st argument (original extension) is null"
+  echo "Example: exext jpg png"
+  echo "ffmpeg -i *.jpg *.png"
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "2nd argument (target extension) is null"
+  echo "Example: exext jpg png"
+  echo "ffmpeg -i *.jpg *.png"
+  exit 1
+fi
+
+if [ "$2" == "avif" ]; then
+  for f in *.$1; do
+    [ -e "$f" ] || continue  # Skip if no files match
+    echo ""
+    echo "ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i \"$f\" -c:v librav1e -qp 100 \"${f%.*}.$2\""
+    echo ""
+    ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "$f" -c:v librav1e -qp 100 "${f%.*}.$2"
+  done
+  exit 0
+fi
+
+for f in *.$1; do
+  [ -e "$f" ] || continue  # Skip if no files match
+  echo ""
+  echo "ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i \"$f\" \"${f%.*}.$2\""
+  echo ""
+  ffmpeg -hide_banner -y -threads 4 -hwaccel auto -i "$f" "${f%.*}.$2"
+
 done
